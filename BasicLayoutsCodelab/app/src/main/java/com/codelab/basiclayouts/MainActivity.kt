@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -50,6 +51,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -64,6 +67,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.trace
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
 
 class MainActivity : ComponentActivity() {
@@ -286,7 +290,48 @@ fun MySootheAppPortrait() {
 // Step: Bottom navigation - Material
 @Composable
 private fun SootheNavigationRail(modifier: Modifier = Modifier) {
-    // Implement composable here
+    NavigationRail(
+        containerColor = MaterialTheme.colorScheme.background,
+        modifier = modifier.padding(start = 8.dp, end = 8.dp)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            NavigationRailItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Spa,
+                        contentDescription = null,
+                    )
+                },
+                label = {
+                    Text(
+                        text = stringResource(R.string.bottom_navigation_home)
+                    )
+                },
+                selected = true,
+                onClick = {}
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            NavigationRailItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = null,
+                    )
+                },
+                label = {
+                    Text(
+                        text = stringResource(R.string.bottom_navigation_profile)
+                    )
+                },
+                selected = false,
+                onClick = {}
+            )
+        }
+    }
 }
 
 // Step: Landscape Mode
