@@ -3,23 +3,27 @@ package com.example.basicstatecodelab
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 
 @Composable
 fun WellnessTasksList(
-    modifier: Modifier = Modifier,
+    list: List<WellnessTask>,
+    onCheckedChange: (WellnessTask, Boolean) -> Unit,
     onCloseTask: (WellnessTask) -> Unit,
-    list: List<WellnessTask> = remember { getWellnessTasks().toMutableStateList() }
+    modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(list) { task ->
-            WellnessTaskItem(taskName = task.label, onClose = { onCloseTask(task) })
+        items(
+            items = list,
+            key = { task -> task.id }
+        ) { task ->
+            WellnessTaskItem(
+                taskName = task.label,
+                checked = task.checked,
+                onCheckedChange = { checked -> onCheckedChange(task, checked) },
+                onClose = { onCloseTask(task) })
         }
     }
 }
-
-fun getWellnessTasks() = List(30) { i -> WellnessTask(i, "Task # $i") }
