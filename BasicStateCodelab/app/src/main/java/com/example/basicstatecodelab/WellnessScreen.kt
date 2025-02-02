@@ -15,7 +15,7 @@ fun WellnessScreen(
 
         WellnessTasksList(
             list = wellnessViewModel.tasks,
-            onCheckedChange = { task, checked ->
+            onCheckedTask = { task, checked ->
                 wellnessViewModel.changeTaskChecked(task, checked)
             },
             onCloseTask = { task ->
